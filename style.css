@@ -1,0 +1,90 @@
+    :root {
+        --pink: hsl(338, 70%, 55%);
+        --teal: hsl(183, 70%, 62%);
+        --white: hsl(334, 7%, 95%);
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    body {
+        background: hsl(224, 32%, 12%);
+        background-image: conic-gradient(from 0deg at 50% 50%,
+                blue,
+                purple,
+                purple,
+                blue);
+        background-blend-mode: multiply;
+        color: #fff;
+        min-block-size: 100dvh;
+        display: grid;
+        place-items: center;
+    }
+
+    pre {
+        /* --selector: var(var(--pink));
+        --property: var(var(--teal));
+        --punctuation: var(var(--white)); */
+
+        font-size: 3rem;
+        font-weight: bold;
+        background: hsl(222, 45%, 7%);
+        padding: 2rem;
+        border-radius: 1rem;
+
+        position: relative;
+
+        transform-style: preserve-3d; /* https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style */
+        transform: 
+            perspective(5000px) /* makes it more 3D using depth */
+            rotateY(var(--rotateY))
+            rotateX(var(--rotateX));
+    }
+
+    .selector {
+        color: var(--pink);
+    }
+
+    .property {
+        color: var(--teal);
+    }
+
+    .punctuation {
+        color: var(--white);
+    }
+
+    .property + .punctuation {
+        color: var(--teal);
+    }
+
+    /* Glow */
+    pre > * {
+        /* text-shadow: 0 0 0.3em #fff; */
+        text-shadow: 0 0 0.3em currentColor;
+    }
+
+    /* gradient background */
+    pre::before,
+    pre::after{
+        content: "";
+        position: absolute;
+        border-radius: inherit; 
+    }
+
+    pre::after{
+        inset: -1rem; /* a shorthand for the four inset properties, top , right , bottom and left in one declaration */
+        /* inset: 0rem; meaning it's actually matching the actual size of "pre" */
+        background: linear-gradient(-45deg, #ff0000, #0000ff);
+        transform: translateZ(-50px);
+    }
+
+    pre::before{
+        inset: 0.75rem;
+        background: #000000;
+        transform: translateZ(-49px); 
+        filter: blur(15px);
+        opacity: 0.5;  
+    }
